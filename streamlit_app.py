@@ -329,7 +329,8 @@ st.markdown("""
 @st.cache_data
 def carregar_dados():
     """Carrega os dados tratados"""
-    base_path = Path(r"C:\Users\Administrador\Desktop\GitHub Henrique Pessoal Top demais\Indorama")
+    # Usa caminho relativo para funcionar no Streamlit Cloud
+    base_path = Path(__file__).parent
     df_long = pd.read_excel(base_path / "dados_long.xlsx")
     df_acelerado = pd.read_excel(base_path / "dados_acelerado.xlsx")
     df_longa = pd.read_excel(base_path / "dados_longa_duracao.xlsx")
