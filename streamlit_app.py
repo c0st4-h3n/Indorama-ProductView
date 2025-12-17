@@ -23,18 +23,18 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# CSS customizado - Design moderno e limpo
+# CSS customizado - Design Indorama Ventures
 st.markdown("""
 <style>
-    /* Reset e base */
+    /* Reset e base - Cores Indorama */
     .stApp {
-        background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #16213e 100%);
+        background: linear-gradient(135deg, #0a1628 0%, #0d2137 50%, #0f2847 100%);
     }
 
     /* Sidebar styling */
     [data-testid="stSidebar"] {
-        background: linear-gradient(180deg, #1a1a2e 0%, #0f0f1a 100%);
-        border-right: 1px solid rgba(99, 102, 241, 0.2);
+        background: linear-gradient(180deg, #0d2137 0%, #0a1628 100%);
+        border-right: 1px solid rgba(0, 163, 224, 0.2);
     }
 
     [data-testid="stSidebar"] .stMarkdown {
@@ -49,9 +49,9 @@ st.markdown("""
 
     /* Main title styling */
     .main-title {
-        font-size: 2.8rem;
+        font-size: 2.2rem;
         font-weight: 700;
-        background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%);
+        background: linear-gradient(135deg, #003366 0%, #0055a4 50%, #00a3e0 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
@@ -63,13 +63,34 @@ st.markdown("""
         color: #94a3b8;
         font-size: 1.1rem;
         font-weight: 400;
-        margin-bottom: 2rem;
+        margin-bottom: 1.5rem;
+    }
+
+    /* Header container with logo */
+    .header-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem 0;
+        margin-bottom: 1rem;
+        border-bottom: 2px solid rgba(0, 163, 224, 0.3);
+    }
+
+    .header-left {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+    .header-title-section {
+        display: flex;
+        flex-direction: column;
     }
 
     /* Metric cards */
     .metric-container {
-        background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
-        border: 1px solid rgba(99, 102, 241, 0.3);
+        background: linear-gradient(135deg, rgba(0, 51, 102, 0.2) 0%, rgba(0, 85, 164, 0.15) 100%);
+        border: 1px solid rgba(0, 163, 224, 0.3);
         border-radius: 16px;
         padding: 1.5rem;
         text-align: center;
@@ -78,15 +99,15 @@ st.markdown("""
     }
 
     .metric-container:hover {
-        border-color: rgba(99, 102, 241, 0.6);
+        border-color: rgba(0, 163, 224, 0.6);
         transform: translateY(-2px);
-        box-shadow: 0 8px 32px rgba(99, 102, 241, 0.2);
+        box-shadow: 0 8px 32px rgba(0, 163, 224, 0.2);
     }
 
     .metric-value {
         font-size: 2.5rem;
         font-weight: 700;
-        background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+        background: linear-gradient(135deg, #0055a4 0%, #00a3e0 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
@@ -103,19 +124,19 @@ st.markdown("""
     }
 
     .metric-delta {
-        color: #10b981;
+        color: #00a651;
         font-size: 0.85rem;
         margin-top: 0.25rem;
     }
 
     .metric-delta.negative {
-        color: #ef4444;
+        color: #c8102e;
     }
 
     /* Cards de info */
     .info-card {
-        background: rgba(30, 41, 59, 0.5);
-        border: 1px solid rgba(148, 163, 184, 0.1);
+        background: rgba(0, 51, 102, 0.3);
+        border: 1px solid rgba(0, 163, 224, 0.15);
         border-radius: 12px;
         padding: 1rem 1.25rem;
         margin-bottom: 0.75rem;
@@ -138,10 +159,10 @@ st.markdown("""
     /* Tabs styling */
     .stTabs [data-baseweb="tab-list"] {
         gap: 4px;
-        background: rgba(30, 41, 59, 0.5);
+        background: rgba(0, 51, 102, 0.3);
         padding: 6px;
         border-radius: 12px;
-        border: 1px solid rgba(148, 163, 184, 0.1);
+        border: 1px solid rgba(0, 163, 224, 0.15);
     }
 
     .stTabs [data-baseweb="tab"] {
@@ -154,7 +175,7 @@ st.markdown("""
     }
 
     .stTabs [aria-selected="true"] {
-        background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+        background: linear-gradient(135deg, #003366 0%, #0055a4 100%);
         color: white !important;
     }
 
@@ -164,22 +185,22 @@ st.markdown("""
 
     /* Selectbox styling */
     .stSelectbox > div > div {
-        background: rgba(30, 41, 59, 0.8);
-        border: 1px solid rgba(148, 163, 184, 0.2);
+        background: rgba(0, 51, 102, 0.4);
+        border: 1px solid rgba(0, 163, 224, 0.2);
         border-radius: 10px;
         color: #e2e8f0;
     }
 
     .stSelectbox > div > div:hover {
-        border-color: rgba(99, 102, 241, 0.5);
+        border-color: rgba(0, 163, 224, 0.5);
     }
 
     /* Radio buttons */
     .stRadio > div {
-        background: rgba(30, 41, 59, 0.5);
+        background: rgba(0, 51, 102, 0.3);
         padding: 0.75rem 1rem;
         border-radius: 10px;
-        border: 1px solid rgba(148, 163, 184, 0.1);
+        border: 1px solid rgba(0, 163, 224, 0.15);
     }
 
     .stRadio label {
@@ -188,22 +209,22 @@ st.markdown("""
 
     /* Dataframe styling */
     .stDataFrame {
-        background: rgba(30, 41, 59, 0.5);
+        background: rgba(0, 51, 102, 0.3);
         border-radius: 12px;
-        border: 1px solid rgba(148, 163, 184, 0.1);
+        border: 1px solid rgba(0, 163, 224, 0.15);
     }
 
     /* Alert/Info boxes */
     .stAlert {
-        background: rgba(99, 102, 241, 0.1);
-        border: 1px solid rgba(99, 102, 241, 0.3);
+        background: rgba(0, 85, 164, 0.15);
+        border: 1px solid rgba(0, 163, 224, 0.3);
         border-radius: 10px;
         color: #e2e8f0;
     }
 
     /* Divider */
     hr {
-        border-color: rgba(148, 163, 184, 0.1);
+        border-color: rgba(0, 163, 224, 0.15);
         margin: 2rem 0;
     }
 
@@ -214,7 +235,7 @@ st.markdown("""
         gap: 0.75rem;
         margin-bottom: 1.5rem;
         padding-bottom: 0.75rem;
-        border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+        border-bottom: 1px solid rgba(0, 163, 224, 0.2);
     }
 
     .section-icon {
@@ -239,9 +260,9 @@ st.markdown("""
     }
 
     .badge-success {
-        background: rgba(16, 185, 129, 0.2);
-        color: #10b981;
-        border: 1px solid rgba(16, 185, 129, 0.3);
+        background: rgba(0, 166, 81, 0.2);
+        color: #00a651;
+        border: 1px solid rgba(0, 166, 81, 0.3);
     }
 
     .badge-warning {
@@ -251,9 +272,9 @@ st.markdown("""
     }
 
     .badge-danger {
-        background: rgba(239, 68, 68, 0.2);
-        color: #ef4444;
-        border: 1px solid rgba(239, 68, 68, 0.3);
+        background: rgba(200, 16, 46, 0.2);
+        color: #c8102e;
+        border: 1px solid rgba(200, 16, 46, 0.3);
     }
 
     /* Plotly chart container */
@@ -269,16 +290,16 @@ st.markdown("""
     }
 
     ::-webkit-scrollbar-track {
-        background: rgba(30, 41, 59, 0.5);
+        background: rgba(0, 51, 102, 0.3);
     }
 
     ::-webkit-scrollbar-thumb {
-        background: rgba(99, 102, 241, 0.5);
+        background: rgba(0, 163, 224, 0.5);
         border-radius: 4px;
     }
 
     ::-webkit-scrollbar-thumb:hover {
-        background: rgba(99, 102, 241, 0.7);
+        background: rgba(0, 163, 224, 0.7);
     }
 
     /* Hide Streamlit branding */
@@ -287,8 +308,8 @@ st.markdown("""
 
     /* Product info card */
     .product-info {
-        background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
-        border: 1px solid rgba(99, 102, 241, 0.2);
+        background: linear-gradient(135deg, rgba(0, 51, 102, 0.15) 0%, rgba(0, 85, 164, 0.1) 100%);
+        border: 1px solid rgba(0, 163, 224, 0.2);
         border-radius: 12px;
         padding: 1rem;
         margin-top: 1rem;
@@ -303,8 +324,8 @@ st.markdown("""
 
     /* Ensaio selector card */
     .ensaio-card {
-        background: rgba(30, 41, 59, 0.6);
-        border: 1px solid rgba(148, 163, 184, 0.15);
+        background: rgba(0, 51, 102, 0.35);
+        border: 1px solid rgba(0, 163, 224, 0.2);
         border-radius: 12px;
         padding: 1.25rem;
         margin-bottom: 1rem;
@@ -312,12 +333,38 @@ st.markdown("""
 
     /* Spec info */
     .spec-info {
-        background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(6, 182, 212, 0.1) 100%);
-        border: 1px solid rgba(16, 185, 129, 0.2);
+        background: linear-gradient(135deg, rgba(0, 166, 81, 0.1) 0%, rgba(0, 163, 224, 0.1) 100%);
+        border: 1px solid rgba(0, 166, 81, 0.2);
         border-radius: 10px;
         padding: 0.75rem 1rem;
-        color: #10b981;
+        color: #00a651;
         font-weight: 500;
+    }
+
+    /* Footer styling */
+    .footer-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+        padding: 2rem 0;
+        border-top: 1px solid rgba(0, 163, 224, 0.2);
+        margin-top: 2rem;
+    }
+
+    .footer-text {
+        color: #64748b;
+        font-size: 0.85rem;
+        text-align: center;
+    }
+
+    /* Sidebar logo container */
+    .sidebar-logo {
+        display: flex;
+        justify-content: center;
+        padding: 1rem 0;
+        margin-bottom: 1rem;
+        border-bottom: 1px solid rgba(0, 163, 224, 0.2);
     }
 </style>
 """, unsafe_allow_html=True)
@@ -344,34 +391,42 @@ ORDEM_PERIODOS = {
     '9m': 270, '12m': 365, '18m': 545, '24m': 730, '30m': 912, '36m': 1095
 }
 
-# Cores do tema
+# Cores do tema - Baseado na identidade visual Indorama Ventures
 COLORS = {
-    'primary': '#6366f1',
-    'secondary': '#8b5cf6',
-    'accent': '#a855f7',
-    'success': '#10b981',
-    'warning': '#f59e0b',
-    'danger': '#ef4444',
-    'bg_dark': '#0f0f1a',
-    'bg_card': 'rgba(30, 41, 59, 0.8)',
+    'primary': '#003366',      # Azul Indorama escuro
+    'secondary': '#0055a4',    # Azul Indorama médio
+    'accent': '#00a3e0',       # Azul Dobslit/Accent
+    'success': '#00a651',      # Verde Indorama
+    'warning': '#f59e0b',      # Amarelo alerta
+    'danger': '#c8102e',       # Vermelho Indorama
+    'bg_dark': '#0a1628',      # Fundo escuro azulado
+    'bg_card': 'rgba(0, 51, 102, 0.3)',
     'text': '#e2e8f0',
     'text_muted': '#94a3b8',
-    'border': 'rgba(148, 163, 184, 0.2)'
+    'border': 'rgba(0, 163, 224, 0.2)'
 }
 
 # ============================================================
 # HEADER
 # ============================================================
 
-st.markdown('<h1 class="main-title">🧪 Dashboard de Estabilidade</h1>', unsafe_allow_html=True)
-st.markdown('<p class="subtitle">Análise de estudos de estabilidade • Indovinya</p>', unsafe_allow_html=True)
+# Header com logo Indorama
+col_logo, col_title = st.columns([1, 4])
+with col_logo:
+    st.image("Indorama_Ventures_Logo.png", width=180)
+with col_title:
+    st.markdown('<h1 class="main-title">Dashboard de Estabilidade</h1>', unsafe_allow_html=True)
+    st.markdown('<p class="subtitle">Indovinya - Especialidades Quimicas</p>', unsafe_allow_html=True)
 
 # ============================================================
 # SIDEBAR
 # ============================================================
 
 with st.sidebar:
-    st.markdown("### 🎛️ Filtros")
+    # Logo Dobslit no topo da sidebar
+    st.image("LOGOMARCA_DOBSLIT.PNG", width=150)
+    st.markdown("---")
+    st.markdown("### Filtros")
 
     # Tipo de estudo com visual melhorado
     tipo_estudo = st.radio(
@@ -573,8 +628,8 @@ if len(categorias) > 0:
                             y=df_plot['valor_num'],
                             mode='lines+markers',
                             name='Valor Medido',
-                            line=dict(color='#6366f1', width=3),
-                            marker=dict(size=12, symbol='circle', color='#6366f1',
+                            line=dict(color='#00a3e0', width=3),
+                            marker=dict(size=12, symbol='circle', color='#0055a4',
                                        line=dict(color='#ffffff', width=2)),
                             hovertemplate='<b>%{x}</b><br>Valor: %{y:.2f}<extra></extra>'
                         ))
@@ -707,9 +762,9 @@ if len(df_quant) > 0:
         x=pivot.columns,
         y=pivot.index,
         colorscale=[
-            [0, '#ef4444'],
-            [0.5, '#64748b'],
-            [1, '#10b981']
+            [0, '#c8102e'],
+            [0.5, '#0055a4'],
+            [1, '#00a651']
         ],
         showscale=True,
         colorbar=dict(
@@ -746,8 +801,19 @@ else:
 # ============================================================
 
 st.markdown("<br><br>", unsafe_allow_html=True)
-st.markdown("""
-<div style="text-align: center; color: #64748b; font-size: 0.85rem; padding: 2rem 0;">
-    Dashboard de Estabilidade • Indovinya • Dados tratados automaticamente
-</div>
-""", unsafe_allow_html=True)
+st.markdown("---")
+
+# Footer com logos e texto
+col_f1, col_f2, col_f3 = st.columns([1, 2, 1])
+with col_f1:
+    st.image("Indorama_Ventures_Logo.png", width=120)
+with col_f2:
+    st.markdown("""
+    <div style="text-align: center; color: #64748b; font-size: 0.85rem; padding: 1rem 0;">
+        <strong>Dashboard de Estabilidade</strong><br>
+        Indovinya - Especialidades Quimicas<br>
+        <span style="color: #00a3e0;">Desenvolvido por Dobslit</span>
+    </div>
+    """, unsafe_allow_html=True)
+with col_f3:
+    st.image("LOGOMARCA_DOBSLIT.PNG", width=100)
