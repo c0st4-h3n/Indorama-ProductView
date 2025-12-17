@@ -23,27 +23,33 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# CSS customizado - Design Indorama Ventures
+# CSS customizado - Design Indorama Ventures (Fundo Claro)
 st.markdown("""
 <style>
-    /* Reset e base - Cores Indorama */
+    /* Reset e base - Tema claro profissional */
     .stApp {
-        background: linear-gradient(135deg, #0a1628 0%, #0d2137 50%, #0f2847 100%);
+        background: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%);
     }
 
-    /* Sidebar styling */
+    /* Sidebar styling - Azul Indorama */
     [data-testid="stSidebar"] {
-        background: linear-gradient(180deg, #0d2137 0%, #0a1628 100%);
-        border-right: 1px solid rgba(0, 163, 224, 0.2);
+        background: linear-gradient(180deg, #003366 0%, #002244 100%);
+        border-right: 3px solid #00a3e0;
     }
 
     [data-testid="stSidebar"] .stMarkdown {
-        color: #e2e8f0;
+        color: #ffffff;
+    }
+
+    [data-testid="stSidebar"] h1,
+    [data-testid="stSidebar"] h2,
+    [data-testid="stSidebar"] h3 {
+        color: #ffffff !important;
     }
 
     /* Headers */
     h1, h2, h3 {
-        color: #f1f5f9 !important;
+        color: #003366 !important;
         font-weight: 600 !important;
     }
 
@@ -51,73 +57,57 @@ st.markdown("""
     .main-title {
         font-size: 2.2rem;
         font-weight: 700;
-        background: linear-gradient(135deg, #003366 0%, #0055a4 50%, #00a3e0 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        margin-bottom: 0.5rem;
+        color: #003366 !important;
+        -webkit-text-fill-color: #003366;
+        margin-bottom: 0.3rem;
         letter-spacing: -0.02em;
     }
 
     .subtitle {
-        color: #94a3b8;
-        font-size: 1.1rem;
+        color: #64748b;
+        font-size: 1rem;
         font-weight: 400;
-        margin-bottom: 1.5rem;
-    }
-
-    /* Header container with logo */
-    .header-container {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 1rem 0;
         margin-bottom: 1rem;
-        border-bottom: 2px solid rgba(0, 163, 224, 0.3);
     }
 
-    .header-left {
-        display: flex;
-        align-items: center;
-        gap: 1.5rem;
-    }
-
-    .header-title-section {
-        display: flex;
-        flex-direction: column;
+    /* Logo container - fundo branco para contraste */
+    .logo-container {
+        background: #ffffff;
+        padding: 1rem;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        display: inline-block;
     }
 
     /* Metric cards */
     .metric-container {
-        background: linear-gradient(135deg, rgba(0, 51, 102, 0.2) 0%, rgba(0, 85, 164, 0.15) 100%);
-        border: 1px solid rgba(0, 163, 224, 0.3);
-        border-radius: 16px;
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-left: 4px solid #003366;
+        border-radius: 12px;
         padding: 1.5rem;
         text-align: center;
-        backdrop-filter: blur(10px);
+        box-shadow: 0 2px 8px rgba(0,0,0,0.06);
         transition: all 0.3s ease;
     }
 
     .metric-container:hover {
-        border-color: rgba(0, 163, 224, 0.6);
+        border-left-color: #00a3e0;
         transform: translateY(-2px);
-        box-shadow: 0 8px 32px rgba(0, 163, 224, 0.2);
+        box-shadow: 0 8px 24px rgba(0, 51, 102, 0.12);
     }
 
     .metric-value {
         font-size: 2.5rem;
         font-weight: 700;
-        background: linear-gradient(135deg, #0055a4 0%, #00a3e0 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
+        color: #003366;
         line-height: 1.2;
     }
 
     .metric-label {
-        color: #94a3b8;
-        font-size: 0.9rem;
-        font-weight: 500;
+        color: #64748b;
+        font-size: 0.85rem;
+        font-weight: 600;
         text-transform: uppercase;
         letter-spacing: 0.05em;
         margin-top: 0.5rem;
@@ -133,42 +123,43 @@ st.markdown("""
         color: #c8102e;
     }
 
-    /* Cards de info */
+    /* Cards de info na sidebar */
     .info-card {
-        background: rgba(0, 51, 102, 0.3);
-        border: 1px solid rgba(0, 163, 224, 0.15);
-        border-radius: 12px;
-        padding: 1rem 1.25rem;
-        margin-bottom: 0.75rem;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 10px;
+        padding: 0.875rem 1rem;
+        margin-bottom: 0.625rem;
     }
 
     .info-label {
-        color: #64748b;
-        font-size: 0.75rem;
+        color: #94a3b8;
+        font-size: 0.7rem;
         text-transform: uppercase;
         letter-spacing: 0.05em;
-        margin-bottom: 0.25rem;
+        margin-bottom: 0.2rem;
     }
 
     .info-value {
-        color: #e2e8f0;
-        font-size: 0.95rem;
+        color: #ffffff;
+        font-size: 0.9rem;
         font-weight: 500;
     }
 
     /* Tabs styling */
     .stTabs [data-baseweb="tab-list"] {
         gap: 4px;
-        background: rgba(0, 51, 102, 0.3);
+        background: #ffffff;
         padding: 6px;
         border-radius: 12px;
-        border: 1px solid rgba(0, 163, 224, 0.15);
+        border: 1px solid #e2e8f0;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.04);
     }
 
     .stTabs [data-baseweb="tab"] {
         background: transparent;
         border-radius: 8px;
-        color: #94a3b8;
+        color: #64748b;
         padding: 12px 24px;
         font-weight: 500;
         border: none;
@@ -180,52 +171,54 @@ st.markdown("""
     }
 
     .stTabs [data-baseweb="tab"]:hover {
-        color: #e2e8f0;
+        color: #003366;
+        background: #f1f5f9;
     }
 
     /* Selectbox styling */
     .stSelectbox > div > div {
-        background: rgba(0, 51, 102, 0.4);
-        border: 1px solid rgba(0, 163, 224, 0.2);
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
         border-radius: 10px;
-        color: #e2e8f0;
+        color: #1e293b;
     }
 
     .stSelectbox > div > div:hover {
-        border-color: rgba(0, 163, 224, 0.5);
+        border-color: #00a3e0;
     }
 
-    /* Radio buttons */
-    .stRadio > div {
-        background: rgba(0, 51, 102, 0.3);
+    /* Radio buttons na sidebar */
+    [data-testid="stSidebar"] .stRadio > div {
+        background: rgba(255, 255, 255, 0.1);
         padding: 0.75rem 1rem;
         border-radius: 10px;
-        border: 1px solid rgba(0, 163, 224, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.2);
     }
 
-    .stRadio label {
-        color: #e2e8f0 !important;
+    [data-testid="stSidebar"] .stRadio label {
+        color: #ffffff !important;
     }
 
     /* Dataframe styling */
     .stDataFrame {
-        background: rgba(0, 51, 102, 0.3);
+        background: #ffffff;
         border-radius: 12px;
-        border: 1px solid rgba(0, 163, 224, 0.15);
+        border: 1px solid #e2e8f0;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.04);
     }
 
     /* Alert/Info boxes */
     .stAlert {
-        background: rgba(0, 85, 164, 0.15);
-        border: 1px solid rgba(0, 163, 224, 0.3);
+        background: #f0f9ff;
+        border: 1px solid #00a3e0;
         border-radius: 10px;
-        color: #e2e8f0;
+        color: #003366;
     }
 
     /* Divider */
     hr {
-        border-color: rgba(0, 163, 224, 0.15);
-        margin: 2rem 0;
+        border-color: #e2e8f0;
+        margin: 1.5rem 0;
     }
 
     /* Section headers */
@@ -235,7 +228,7 @@ st.markdown("""
         gap: 0.75rem;
         margin-bottom: 1.5rem;
         padding-bottom: 0.75rem;
-        border-bottom: 1px solid rgba(0, 163, 224, 0.2);
+        border-bottom: 2px solid #003366;
     }
 
     .section-icon {
@@ -243,7 +236,7 @@ st.markdown("""
     }
 
     .section-title {
-        color: #f1f5f9;
+        color: #003366;
         font-size: 1.25rem;
         font-weight: 600;
         margin: 0;
@@ -253,34 +246,35 @@ st.markdown("""
     .badge {
         display: inline-flex;
         align-items: center;
-        padding: 4px 12px;
+        padding: 6px 14px;
         border-radius: 20px;
         font-size: 0.8rem;
         font-weight: 600;
     }
 
     .badge-success {
-        background: rgba(0, 166, 81, 0.2);
-        color: #00a651;
-        border: 1px solid rgba(0, 166, 81, 0.3);
+        background: #dcfce7;
+        color: #166534;
+        border: 1px solid #86efac;
     }
 
     .badge-warning {
-        background: rgba(245, 158, 11, 0.2);
-        color: #f59e0b;
-        border: 1px solid rgba(245, 158, 11, 0.3);
+        background: #fef3c7;
+        color: #92400e;
+        border: 1px solid #fcd34d;
     }
 
     .badge-danger {
-        background: rgba(200, 16, 46, 0.2);
-        color: #c8102e;
-        border: 1px solid rgba(200, 16, 46, 0.3);
+        background: #fee2e2;
+        color: #991b1b;
+        border: 1px solid #fca5a5;
     }
 
     /* Plotly chart container */
     .js-plotly-plot {
         border-radius: 12px;
         overflow: hidden;
+        background: #ffffff;
     }
 
     /* Scrollbar */
@@ -290,16 +284,16 @@ st.markdown("""
     }
 
     ::-webkit-scrollbar-track {
-        background: rgba(0, 51, 102, 0.3);
+        background: #f1f5f9;
     }
 
     ::-webkit-scrollbar-thumb {
-        background: rgba(0, 163, 224, 0.5);
+        background: #003366;
         border-radius: 4px;
     }
 
     ::-webkit-scrollbar-thumb:hover {
-        background: rgba(0, 163, 224, 0.7);
+        background: #0055a4;
     }
 
     /* Hide Streamlit branding */
@@ -308,15 +302,16 @@ st.markdown("""
 
     /* Product info card */
     .product-info {
-        background: linear-gradient(135deg, rgba(0, 51, 102, 0.15) 0%, rgba(0, 85, 164, 0.1) 100%);
-        border: 1px solid rgba(0, 163, 224, 0.2);
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-left: 4px solid #00a3e0;
         border-radius: 12px;
         padding: 1rem;
         margin-top: 1rem;
     }
 
     .product-name {
-        color: #f1f5f9;
+        color: #003366;
         font-size: 1rem;
         font-weight: 600;
         margin-bottom: 0.75rem;
@@ -324,47 +319,40 @@ st.markdown("""
 
     /* Ensaio selector card */
     .ensaio-card {
-        background: rgba(0, 51, 102, 0.35);
-        border: 1px solid rgba(0, 163, 224, 0.2);
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
         border-radius: 12px;
         padding: 1.25rem;
         margin-bottom: 1rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.04);
     }
 
     /* Spec info */
     .spec-info {
-        background: linear-gradient(135deg, rgba(0, 166, 81, 0.1) 0%, rgba(0, 163, 224, 0.1) 100%);
-        border: 1px solid rgba(0, 166, 81, 0.2);
+        background: linear-gradient(135deg, #dcfce7 0%, #d1fae5 100%);
+        border: 1px solid #86efac;
         border-radius: 10px;
         padding: 0.75rem 1rem;
-        color: #00a651;
-        font-weight: 500;
+        color: #166534;
+        font-weight: 600;
     }
 
-    /* Footer styling */
-    .footer-container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 2rem;
-        padding: 2rem 0;
-        border-top: 1px solid rgba(0, 163, 224, 0.2);
-        margin-top: 2rem;
+    /* Footer com fundo branco */
+    .footer-box {
+        background: #ffffff;
+        border-radius: 12px;
+        padding: 1.5rem;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        border-top: 3px solid #003366;
     }
 
-    .footer-text {
-        color: #64748b;
-        font-size: 0.85rem;
-        text-align: center;
-    }
-
-    /* Sidebar logo container */
-    .sidebar-logo {
-        display: flex;
-        justify-content: center;
-        padding: 1rem 0;
+    /* Sidebar logo com fundo branco */
+    .sidebar-logo-box {
+        background: #ffffff;
+        border-radius: 10px;
+        padding: 0.75rem;
         margin-bottom: 1rem;
-        border-bottom: 1px solid rgba(0, 163, 224, 0.2);
+        text-align: center;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -423,9 +411,10 @@ with col_title:
 # ============================================================
 
 with st.sidebar:
-    # Logo Dobslit no topo da sidebar
-    st.image("LOGOMARCA_DOBSLIT.PNG", width=150)
-    st.markdown("---")
+    # Logo Dobslit em container branco para contraste
+    st.markdown('<div class="sidebar-logo-box">', unsafe_allow_html=True)
+    st.image("LOGOMARCA_DOBSLIT.PNG", width=140)
+    st.markdown('</div>', unsafe_allow_html=True)
     st.markdown("### Filtros")
 
     # Tipo de estudo com visual melhorado
@@ -637,20 +626,20 @@ if len(categorias) > 0:
                         fig.update_layout(
                             title=dict(
                                 text=f"<b>Evolução Temporal - {ensaio_selecionado}</b>",
-                                font=dict(size=16, color='#f1f5f9')
+                                font=dict(size=16, color='#003366')
                             ),
                             xaxis=dict(
-                                title=dict(text="Período", font=dict(color='#94a3b8')),
-                                gridcolor='rgba(148, 163, 184, 0.1)',
-                                tickfont=dict(color='#94a3b8')
+                                title=dict(text="Período", font=dict(color='#64748b')),
+                                gridcolor='#e2e8f0',
+                                tickfont=dict(color='#64748b')
                             ),
                             yaxis=dict(
-                                title=dict(text="Valor", font=dict(color='#94a3b8')),
-                                gridcolor='rgba(148, 163, 184, 0.1)',
-                                tickfont=dict(color='#94a3b8')
+                                title=dict(text="Valor", font=dict(color='#64748b')),
+                                gridcolor='#e2e8f0',
+                                tickfont=dict(color='#64748b')
                             ),
-                            plot_bgcolor='rgba(15, 15, 26, 0.8)',
-                            paper_bgcolor='rgba(0,0,0,0)',
+                            plot_bgcolor='#ffffff',
+                            paper_bgcolor='#ffffff',
                             height=400,
                             margin=dict(l=60, r=30, t=60, b=60),
                             legend=dict(
@@ -659,7 +648,7 @@ if len(categorias) > 0:
                                 y=1.02,
                                 xanchor="right",
                                 x=1,
-                                font=dict(color='#94a3b8')
+                                font=dict(color='#64748b')
                             ),
                             hovermode='x unified'
                         )
@@ -768,26 +757,26 @@ if len(df_quant) > 0:
         ],
         showscale=True,
         colorbar=dict(
-            title=dict(text="Status", font=dict(color='#94a3b8')),
+            title=dict(text="Status", font=dict(color='#64748b')),
             tickvals=[0, 0.5, 1],
             ticktext=['Fora', 'N/A', 'OK'],
-            tickfont=dict(color='#94a3b8'),
-            bgcolor='rgba(0,0,0,0)'
+            tickfont=dict(color='#64748b'),
+            bgcolor='#ffffff'
         ),
         hovertemplate='<b>%{y}</b><br>Período: %{x}<br>Status: %{z:.0%}<extra></extra>'
     ))
 
     fig_heat.update_layout(
         xaxis=dict(
-            title=dict(text="Período", font=dict(color='#94a3b8')),
-            tickfont=dict(color='#94a3b8')
+            title=dict(text="Período", font=dict(color='#64748b')),
+            tickfont=dict(color='#64748b')
         ),
         yaxis=dict(
-            title=dict(text="Ensaio", font=dict(color='#94a3b8')),
-            tickfont=dict(color='#94a3b8', size=10)
+            title=dict(text="Ensaio", font=dict(color='#64748b')),
+            tickfont=dict(color='#64748b', size=10)
         ),
-        plot_bgcolor='rgba(15, 15, 26, 0.8)',
-        paper_bgcolor='rgba(0,0,0,0)',
+        plot_bgcolor='#ffffff',
+        paper_bgcolor='#ffffff',
         height=max(400, len(pivot) * 28),
         margin=dict(l=200, r=50, t=30, b=60)
     )
@@ -800,20 +789,21 @@ else:
 # FOOTER
 # ============================================================
 
-st.markdown("<br><br>", unsafe_allow_html=True)
-st.markdown("---")
+st.markdown("<br>", unsafe_allow_html=True)
 
-# Footer com logos e texto
+# Footer com fundo branco para contraste das logos
+st.markdown('<div class="footer-box">', unsafe_allow_html=True)
 col_f1, col_f2, col_f3 = st.columns([1, 2, 1])
 with col_f1:
-    st.image("Indorama_Ventures_Logo.png", width=120)
+    st.image("Indorama_Ventures_Logo.png", width=140)
 with col_f2:
     st.markdown("""
-    <div style="text-align: center; color: #64748b; font-size: 0.85rem; padding: 1rem 0;">
-        <strong>Dashboard de Estabilidade</strong><br>
-        Indovinya - Especialidades Quimicas<br>
-        <span style="color: #00a3e0;">Desenvolvido por Dobslit</span>
+    <div style="text-align: center; color: #64748b; font-size: 0.9rem; padding: 0.5rem 0;">
+        <strong style="color: #003366;">Dashboard de Estabilidade</strong><br>
+        <span style="color: #64748b;">Indovinya - Especialidades Quimicas</span><br><br>
+        <span style="color: #00a3e0; font-weight: 600;">Desenvolvido por Dobslit</span>
     </div>
     """, unsafe_allow_html=True)
 with col_f3:
-    st.image("LOGOMARCA_DOBSLIT.PNG", width=100)
+    st.image("LOGOMARCA_DOBSLIT.PNG", width=120)
+st.markdown('</div>', unsafe_allow_html=True)
