@@ -213,42 +213,38 @@ st.markdown("""
         color: #ffffff !important;
     }
 
-    /* Dataframe styling - força tema claro completo */
-    .stDataFrame,
-    [data-testid="stDataFrame"],
-    [data-testid="stDataFrame"] > div,
-    [data-testid="stDataFrame"] > div > div,
-    [data-testid="stDataFrame"] iframe,
-    .st-emotion-cache-12yo0lz,
-    [class*="st-emotion-cache"] [data-testid="stDataFrame"] {
-        background: #f8fafc !important;
-        background-color: #f8fafc !important;
-        border-radius: 12px;
+    /* Tabela customizada */
+    .custom-table {
+        width: 100%;
+        border-collapse: collapse;
+        background: #ffffff;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.06);
     }
 
-    /* Força tema claro no dataframe - todas as variáveis */
-    [data-testid="stDataFrame"] [data-testid="glideDataEditor"],
-    [data-testid="stDataFrame"] canvas,
-    .dvn-scroller {
-        --gdg-bg-cell: #ffffff !important;
-        --gdg-bg-cell-medium: #f8fafc !important;
-        --gdg-bg-header: #e2e8f0 !important;
-        --gdg-bg-header-has-focus: #cbd5e1 !important;
-        --gdg-text-dark: #1e293b !important;
-        --gdg-text-medium: #475569 !important;
-        --gdg-text-light: #64748b !important;
-        --gdg-text-header: #003366 !important;
-        --gdg-border-color: #e2e8f0 !important;
-        --gdg-bg-bubble: #f1f5f9 !important;
-        --gdg-bg-bubble-selected: #e2e8f0 !important;
-        --gdg-accent-color: #003366 !important;
-        --gdg-accent-light: #0055a4 !important;
-        background-color: #f8fafc !important;
+    .custom-table th {
+        background: #003366;
+        color: #ffffff;
+        padding: 12px 16px;
+        text-align: left;
+        font-weight: 600;
+        font-size: 0.85rem;
     }
 
-    /* Força cor de texto nas células */
-    [data-testid="stDataFrame"] * {
-        color: #1e293b !important;
+    .custom-table td {
+        padding: 10px 16px;
+        border-bottom: 1px solid #e2e8f0;
+        color: #1e293b;
+        font-size: 0.9rem;
+    }
+
+    .custom-table tr:nth-child(even) {
+        background: #f8fafc;
+    }
+
+    .custom-table tr:hover {
+        background: #f1f5f9;
     }
 
     /* Textos na area principal - força cor escura */
@@ -714,7 +710,7 @@ if len(categorias) > 0:
                         st.markdown(f"**{row['periodo']}:** `{row['valor']}`")
 
             with col_dados:
-                st.markdown("#### 📊 Dados")
+                st.markdown("#### Dados")
 
                 df_ensaio['ordem'] = df_ensaio['periodo'].map(ORDEM_PERIODOS)
                 df_tabela = df_ensaio.sort_values('ordem')[['periodo', 'valor', 'conforme']].copy()
@@ -727,14 +723,13 @@ if len(categorias) > 0:
                     return "➖"
 
                 df_tabela['Status'] = df_tabela['conforme'].apply(format_status)
-                df_tabela = df_tabela.rename(columns={'periodo': 'Período', 'valor': 'Valor'})
 
-                st.dataframe(
-                    df_tabela[['Período', 'Valor', 'Status']],
-                    hide_index=True,
-                    use_container_width=True,
-                    height=300
-                )
+                # Criar tabela HTML customizada
+                table_html = '<table class="custom-table"><thead><tr><th>Período</th><th>Valor</th><th>Status</th></tr></thead><tbody>'
+                for _, row in df_tabela.iterrows():
+                    table_html += f'<tr><td>{row["periodo"]}</td><td>{row["valor"]}</td><td>{row["Status"]}</td></tr>'
+                table_html += '</tbody></table>'
+                st.markdown(table_html, unsafe_allow_html=True)
 
                 # Métricas do ensaio
                 if is_quant and 'valor_num' in df_ensaio.columns and len(df_ensaio.dropna(subset=['valor_num'])) > 0:
