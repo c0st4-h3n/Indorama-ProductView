@@ -199,12 +199,47 @@ st.markdown("""
         color: #ffffff !important;
     }
 
-    /* Dataframe styling */
-    .stDataFrame {
-        background: #ffffff;
+    /* Dataframe styling - força fundo branco e texto escuro */
+    .stDataFrame,
+    [data-testid="stDataFrame"],
+    [data-testid="stDataFrame"] > div,
+    [data-testid="stDataFrame"] iframe {
+        background: #ffffff !important;
         border-radius: 12px;
         border: 1px solid #e2e8f0;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+
+    /* Força tema claro no dataframe */
+    [data-testid="stDataFrame"] [data-testid="glideDataEditor"] {
+        --gdg-bg-cell: #ffffff !important;
+        --gdg-bg-header: #f8fafc !important;
+        --gdg-text-dark: #1e293b !important;
+        --gdg-text-header: #003366 !important;
+        --gdg-border-color: #e2e8f0 !important;
+    }
+
+    /* Textos na area principal - força cor escura */
+    .stMainBlockContainer p,
+    .stMainBlockContainer span,
+    .stMainBlockContainer label,
+    .stMainBlockContainer .stMarkdown,
+    .stMainBlockContainer .stMarkdown p,
+    [data-testid="stMainBlockContainer"] p,
+    [data-testid="stMainBlockContainer"] label {
+        color: #1e293b !important;
+    }
+
+    /* Headers h4 na area principal */
+    .stMainBlockContainer h4,
+    [data-testid="stMainBlockContainer"] h4 {
+        color: #003366 !important;
+    }
+
+    /* Metric nativo do Streamlit */
+    [data-testid="stMetric"] label,
+    [data-testid="stMetric"] [data-testid="stMetricValue"],
+    [data-testid="stMetric"] [data-testid="stMetricDelta"] {
+        color: #003366 !important;
     }
 
     /* Alert/Info boxes */
@@ -346,13 +381,17 @@ st.markdown("""
         border-top: 3px solid #003366;
     }
 
-    /* Sidebar logo com fundo branco */
-    .sidebar-logo-box {
+    /* Sidebar logo com fundo branco - aplica na imagem diretamente */
+    [data-testid="stSidebar"] [data-testid="stImage"] {
         background: #ffffff;
         border-radius: 10px;
-        padding: 0.75rem;
-        margin-bottom: 1rem;
-        text-align: center;
+        padding: 12px;
+        margin-bottom: 0.5rem;
+    }
+
+    [data-testid="stSidebar"] [data-testid="stImage"] img {
+        display: block;
+        margin: 0 auto;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -411,10 +450,9 @@ with col_title:
 # ============================================================
 
 with st.sidebar:
-    # Logo Dobslit em container branco para contraste
-    st.markdown('<div class="sidebar-logo-box">', unsafe_allow_html=True)
+    # Logo Dobslit - CSS aplica fundo branco automaticamente
     st.image("LOGOMARCA_DOBSLIT.PNG", width=140)
-    st.markdown('</div>', unsafe_allow_html=True)
+    st.markdown("---")
     st.markdown("### Filtros")
 
     # Tipo de estudo com visual melhorado
