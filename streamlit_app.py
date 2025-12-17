@@ -123,27 +123,41 @@ st.markdown("""
         color: #c8102e;
     }
 
-    /* Cards de info na sidebar */
+    /* Cards de info na sidebar - compactos */
     .info-card {
         background: rgba(255, 255, 255, 0.1);
         border: 1px solid rgba(255, 255, 255, 0.2);
-        border-radius: 10px;
-        padding: 0.875rem 1rem;
-        margin-bottom: 0.625rem;
+        border-radius: 8px;
+        padding: 0.5rem 0.75rem;
+        margin-bottom: 0.4rem;
     }
 
     .info-label {
         color: #94a3b8;
-        font-size: 0.7rem;
+        font-size: 0.65rem;
         text-transform: uppercase;
-        letter-spacing: 0.05em;
-        margin-bottom: 0.2rem;
+        letter-spacing: 0.03em;
+        margin-bottom: 0.1rem;
     }
 
     .info-value {
         color: #ffffff;
-        font-size: 0.9rem;
+        font-size: 0.8rem;
         font-weight: 500;
+    }
+
+    /* Sidebar mais compacta */
+    [data-testid="stSidebar"] [data-testid="stVerticalBlock"] {
+        gap: 0.5rem;
+    }
+
+    [data-testid="stSidebar"] hr {
+        margin: 0.5rem 0;
+    }
+
+    [data-testid="stSidebar"] h3 {
+        margin-bottom: 0.3rem;
+        font-size: 0.95rem;
     }
 
     /* Tabs styling */
@@ -199,23 +213,42 @@ st.markdown("""
         color: #ffffff !important;
     }
 
-    /* Dataframe styling - força fundo branco e texto escuro */
+    /* Dataframe styling - força tema claro completo */
     .stDataFrame,
     [data-testid="stDataFrame"],
     [data-testid="stDataFrame"] > div,
-    [data-testid="stDataFrame"] iframe {
-        background: #ffffff !important;
+    [data-testid="stDataFrame"] > div > div,
+    [data-testid="stDataFrame"] iframe,
+    .st-emotion-cache-12yo0lz,
+    [class*="st-emotion-cache"] [data-testid="stDataFrame"] {
+        background: #f8fafc !important;
+        background-color: #f8fafc !important;
         border-radius: 12px;
-        border: 1px solid #e2e8f0;
     }
 
-    /* Força tema claro no dataframe */
-    [data-testid="stDataFrame"] [data-testid="glideDataEditor"] {
+    /* Força tema claro no dataframe - todas as variáveis */
+    [data-testid="stDataFrame"] [data-testid="glideDataEditor"],
+    [data-testid="stDataFrame"] canvas,
+    .dvn-scroller {
         --gdg-bg-cell: #ffffff !important;
-        --gdg-bg-header: #f8fafc !important;
+        --gdg-bg-cell-medium: #f8fafc !important;
+        --gdg-bg-header: #e2e8f0 !important;
+        --gdg-bg-header-has-focus: #cbd5e1 !important;
         --gdg-text-dark: #1e293b !important;
+        --gdg-text-medium: #475569 !important;
+        --gdg-text-light: #64748b !important;
         --gdg-text-header: #003366 !important;
         --gdg-border-color: #e2e8f0 !important;
+        --gdg-bg-bubble: #f1f5f9 !important;
+        --gdg-bg-bubble-selected: #e2e8f0 !important;
+        --gdg-accent-color: #003366 !important;
+        --gdg-accent-light: #0055a4 !important;
+        background-color: #f8fafc !important;
+    }
+
+    /* Força cor de texto nas células */
+    [data-testid="stDataFrame"] * {
+        color: #1e293b !important;
     }
 
     /* Textos na area principal - força cor escura */
@@ -352,16 +385,6 @@ st.markdown("""
         margin-bottom: 0.75rem;
     }
 
-    /* Ensaio selector card */
-    .ensaio-card {
-        background: #ffffff;
-        border: 1px solid #e2e8f0;
-        border-radius: 12px;
-        padding: 1.25rem;
-        margin-bottom: 1rem;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.04);
-    }
-
     /* Spec info */
     .spec-info {
         background: linear-gradient(135deg, #dcfce7 0%, #d1fae5 100%);
@@ -370,15 +393,6 @@ st.markdown("""
         padding: 0.75rem 1rem;
         color: #166534;
         font-weight: 600;
-    }
-
-    /* Footer com fundo branco */
-    .footer-box {
-        background: #ffffff;
-        border-radius: 12px;
-        padding: 1.5rem;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-        border-top: 3px solid #003366;
     }
 
     /* Sidebar logo com fundo branco - aplica na imagem diretamente */
@@ -576,13 +590,11 @@ if len(categorias) > 0:
             col_select, col_spacer, col_info = st.columns([2, 0.5, 2.5])
 
             with col_select:
-                st.markdown('<div class="ensaio-card">', unsafe_allow_html=True)
                 ensaio_selecionado = st.selectbox(
-                    "🔬 Selecione o Ensaio",
+                    "Selecione o Ensaio",
                     ensaios_disponiveis,
                     key=f"ensaio_{categoria}_{i}"
                 )
-                st.markdown('</div>', unsafe_allow_html=True)
 
             df_ensaio = df_cat[df_cat['ensaio_normalizado'] == ensaio_selecionado].copy()
 
@@ -828,20 +840,8 @@ else:
 # ============================================================
 
 st.markdown("<br>", unsafe_allow_html=True)
-
-# Footer com fundo branco para contraste das logos
-st.markdown('<div class="footer-box">', unsafe_allow_html=True)
-col_f1, col_f2, col_f3 = st.columns([1, 2, 1])
-with col_f1:
-    st.image("Indorama_Ventures_Logo.png", width=140)
-with col_f2:
-    st.markdown("""
-    <div style="text-align: center; color: #64748b; font-size: 0.9rem; padding: 0.5rem 0;">
-        <strong style="color: #003366;">Dashboard de Estabilidade</strong><br>
-        <span style="color: #64748b;">Indovinya - Especialidades Quimicas</span><br><br>
-        <span style="color: #00a3e0; font-weight: 600;">Desenvolvido por Dobslit</span>
-    </div>
-    """, unsafe_allow_html=True)
-with col_f3:
-    st.image("LOGOMARCA_DOBSLIT.PNG", width=120)
-st.markdown('</div>', unsafe_allow_html=True)
+st.markdown("""
+<div style="text-align: center; color: #00a3e0; font-size: 0.9rem; font-weight: 600; padding: 1rem 0;">
+    Desenvolvido por Dobslit
+</div>
+""", unsafe_allow_html=True)
